@@ -15,13 +15,13 @@ def find_save_game():
 def search_for_save():
    try: 
     output = find_save_game()
-    search_pattern = "save|gi"
-    cmd = ['grep','-rE', search_pattern, output]
+    search_pattern = "save"
+    cmd = ['find', output, '-iname', f'*{search_pattern}']
     result = subprocess.run(cmd, capture_output=True, text=True)
-    formated = result.stdout.partition(":")[0]
+    formated = result.stdout
     print(formated)
-   except:
-    print("No directory found.")
+   except Exception as e:
+    print(f"No directory found: {e}")
     return     
 def main():
    search_for_save()
