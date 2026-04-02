@@ -6,9 +6,13 @@ import time
 from search_scripts import search_for_save, find_save_game
 from pattern_scripts import add_pattern, delete_pattern
 
-with open('patterns.json', 'r', encoding='utf-8') as f:
+try:
+ with open('patterns.json', 'r', encoding='utf-8') as f:
      search_list = json.load(f)
-
+except: 
+ search_list = ["sav"]  
+ with open('patterns.json', 'w', encoding='utf-8') as f:
+     json.dump(search_list, f, indent=4)
 inner_pattern = r"\|".join(search_list)
 search_pattern = rf".*\({inner_pattern})\).*"
 

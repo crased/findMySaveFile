@@ -1,1 +1,8 @@
+# py test
 test_main.py
+# generic json
+*.json
+
+#generic py cache
+*.pyc
+**__pycache__/
