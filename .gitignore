@@ -5,4 +5,4 @@ test_main.py
 
 #generic py cache
 *.pyc
-**__pycache__/
+**/__pycache__/
