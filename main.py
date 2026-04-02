@@ -1,44 +1,49 @@
 import os
+import sys
 import subprocess
+import json
+import time
+from search_scripts import search_for_save, find_save_game
+from pattern_scripts import add_pattern, delete_pattern
 
-def find_save_game():
- raw_dir = input("Enter folder name: ") 
- if raw_dir is not None and raw_dir.strip() != "":
-  try:
-   pattern = f"*{raw_dir}*"
-   # search root changes the level the search starts at rn its starting in home directory
-   search_root = os.path.expanduser("~/Games")
-   cmd = ['find', search_root, '-type', 'd', '-iname', f"*{raw_dir}*"]
-   result =  subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
-   output, error = result.communicate()
-   if output.strip():
-      paths = output.strip().splitlines()
-      return paths[0]
-   else:
-      print(f"No folder matching '{raw_dir}' found in {search_root}")
-      return None   
-  except Exception as e:
-   print(f"Error has occurred: {e}")
-   return None
- print("Error: Game title cannot be empty.")
- return None
-def search_for_save():
-   try: 
-    path = find_save_game()
-    search_pattern = r".*\(sav\|dat\|profile\|conf\).*"
-    cmd = ['find', path, '-regextype', "sed", "-regex", search_pattern]
-    result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    if len(result.stdout) == 0:
-       print("cannot find save folder :{")
-       print("add folder name to search_pattern")
-    print(result.stdout)
+with open('patterns.json', 'r', encoding='utf-8') as f:
+     search_list = json.load(f)
 
-   except Exception as e:
-    print(f"No directory found: {e} ")
-    return     
+inner_pattern = r"\|".join(search_list)
+search_pattern = rf".*\({inner_pattern})\).*"
+
+   
 def main():
-   search_for_save()
+ exit_code = False
+ while exit_code == False:  
+  try:
+   print("'search': to enter search tool")
+   print("'pattern': to add a pattern")
+   print("'delete': to remove a pattern")
+   print("'exit':  to exit tool")
+   pick = input("type command: ")
+   if pick == "search":
+    search_for_save(search_pattern)
+    time.sleep(5)
+    continue
 
-
+   if pick == "pattern":
+    add_pattern(search_list)
+    print(f"you've added :{search_list[-1:]} to patterns")
+    time.sleep(5)
+    continue
+   elif pick == "delete":
+    delete_pattern(search_list)  
+    print(search_list)
+    time.sleep(5)
+    continue
+   if pick == "exit":
+    #not really needed but extra precaution
+    exit_code = True
+    sys.exit()
+ 
+  except Exception as e:
+   print(f"Error has occurred: {e}") 
+   return 
 if __name__ == "__main__":
    main(); 
