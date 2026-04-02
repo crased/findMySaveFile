@@ -1,4 +1,6 @@
-# py test
+# py
+.venv
+.env
 test_main.py
 # generic json
 *.json
@@ -6,3 +8,9 @@ test_main.py
 #generic py cache
 *.pyc
 **/__pycache__/
+
+#build && dep
+*findsavegame.egg-info
+/findsavegame.egg-info/
+*build
+*build/

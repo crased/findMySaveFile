@@ -8,12 +8,26 @@ Find My Save File is a terminal tool that helps you locate game save files and g
 - **Find Save Files**: Automatically locates save files with common extensions (`.sav`, `.dat`, `.profile`, `.conf`)
 - **Easy-to-use**: Simple terminal interface with minimal setup required
 
+## Installation
+
+```bash
+pip install -e .
+```
+
+If you're on Arch Linux (or another distro that marks Python as externally managed), use `pipx` instead:
+
+```bash
+pipx install .
+```
+
+If you don't have `pipx`, install it first with your package manager (e.g. `sudo pacman -S python-pipx` on Arch).
+
 ## Usage
 
 To run the tool, use the following command:
 
 ```bash
-./findMySave.sh
+findmysave
 ```
 
 When prompted, enter the name of the game or folder you're looking for:
