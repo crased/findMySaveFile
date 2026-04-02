@@ -22,6 +22,13 @@ pipx install .
 
 If you don't have `pipx`, install it first with your package manager (e.g. `sudo pacman -S python-pipx` on Arch).
 
+> **Note:** If you're developing or making changes to the code, use an editable install so changes apply immediately without reinstalling:
+> ```bash
+> pip install -e .
+> # or with pipx:
+> pipx install -e .
+> ```
+
 ## Usage
 
 To run the tool, use the following command:

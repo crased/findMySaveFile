@@ -21,11 +21,12 @@ def main():
  exit_code = False
  while exit_code == False:  
   try:
-   print("'search': to enter search tool")
-   print("'pattern': to add a pattern")
-   print("'delete': to remove a pattern")
-   print("'exit':  to exit tool")
-   pick = input("type command: ")
+   print("\n--- Save Game Finder ---")
+   print("  search  - Search for save files")
+   print("  pattern - Add a search pattern")
+   print("  delete  - Remove a search pattern")
+   print("  exit    - Quit")
+   pick = input("\n> ")
    if pick == "search":
     search_for_save(search_pattern)
     time.sleep(5)
@@ -33,12 +34,12 @@ def main():
 
    if pick == "pattern":
     add_pattern(search_list)
-    print(f"you've added :{search_list[-1:]} to patterns")
+    print(f"[+] Added '{search_list[-1]}' to patterns")
     time.sleep(5)
     continue
    elif pick == "delete":
     delete_pattern(search_list)  
-    print(search_list)
+    print(f"[i] Current patterns: {', '.join(search_list) if search_list else '(none)'}")
     time.sleep(5)
     continue
    if pick == "exit":
@@ -47,7 +48,7 @@ def main():
     sys.exit()
  
   except Exception as e:
-   print(f"Error has occurred: {e}") 
+   print(f"[!] Error: {e}")
    return 
 if __name__ == "__main__":
    main(); 

@@ -17,12 +17,12 @@ def find_save_game():
       paths = output.strip().splitlines()
       return paths[0]
    else:
-      print(f"No folder matching '{raw_dir}' found in {search_root}")
+      print(f"[!] No folder matching '{raw_dir}' found in {search_root}")
       return None   
   except Exception as e:
-   print(f"Error has occurred: {e}")
+   print(f"[!] Error: {e}")
    return None
- print("Error: Game title cannot be empty.")
+ print("[!] Game title cannot be empty.")
  return None
 
 
@@ -33,9 +33,8 @@ def search_for_save(search_pattern):
     cmd = ['find', path, '-regextype', "sed", "-regex", search_pattern]
     result = subprocess.run(cmd, capture_output=True, text=True, check=True)
     if len(result.stdout) == 0:
-       print("cannot find save folder :{")
-       print("add folder name to search_pattern")
-    print(result.stdout)
+       print("[!] No save files found. Try adding the folder name to your search patterns.")
+    print(f"\n[+] Results:\n{result.stdout}")
    except Exception as e:
-    print(f"No directory found: {e} ")
+    print(f"[!] No directory found: {e}")
     return    
