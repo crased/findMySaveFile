@@ -21,11 +21,12 @@ def main():
  exit_code = False
  while exit_code == False:  
   try:
-   print("\n--- Save Game Finder ---")
+   print("\n--------- Save Game Finder ---------")
    print("  search  - Search for save files")
    print("  pattern - Add a search pattern")
    print("  delete  - Remove a search pattern")
    print("  exit    - Quit")
+   print("=" * 36)
    pick = input("\n> ")
    if pick == "search":
     search_for_save(search_pattern)
